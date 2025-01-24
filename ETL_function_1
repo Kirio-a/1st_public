@@ -1,0 +1,46 @@
+1. Подготовка таблицы SQL note (копия).xlsx к преобразованию в CSV формат: переименование и удаление лишних полей, удаление лишних строк и обьединений полей.
+ Поля таблицы:
+  function_type
+	description 
+	function_mysql
+	argument_func_mysql
+	function_postgresql
+	argument_func_postgresql
+	returns
+	detailed_description
+	examples_mysql
+	examples_postgresql
+	replacing
+
+2. Преобразование листа xlsx в csv формат чарез: сохранить как, указав SQL_functions.csv.
+
+3. Создание базы данных mybase в Терминале Линукс : create db mydb
+
+4. Создание схем stage, detail и mart в базе данных mybase с помощью dbeaver: Схемы -> Создать
+  
+5. Создание таблицы в dbeaver с соответствующими(одноименными) полями, с типом данных - text.
+CREATE TABLE stage.sql_functions (
+	function_type text NULL,
+	description text NULL,
+	function_mysql text NULL,
+	argument_func_mysql text NULL,
+	function_postgresql text NULL,
+	argument_func_postgresql text NULL,
+	"returns" text NULL,
+	detailed_description text NULL,
+	examples_mysql text NULL,
+	examples_postgresql text NULL,
+	replacing text NULL,
+	loaded_dttm information_schema."time_stamp" DEFAULT CURRENT_TIMESTAMP NULL
+  );
+
+6. Импорт данных из файла csv:
+      copy stage.sql_function 
+        FROM '/home/kirio/Документы/SQL_functions.csv'
+        with(format csv, header true, DELIMITER ',', encoding UTF8); 
+
+--------------------------------------------------------------------------------
+
+
+
+
